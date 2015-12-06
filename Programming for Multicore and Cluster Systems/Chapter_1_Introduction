@@ -1,0 +1,56 @@
+#Chapter 1 
+# Introduction
+
+@(Parallel Programming for Multicore and Cluster Systems)[Parallel Programming|Operating System|MPI]
+
+--------------------------------------------------
+
+[TOC]
+
+--------------------------------------------------
+
+### 1.2 Parallelism in Today’s Hardware
+
+- The technological development towards **Multicore processors** are forced by physical reasons since **clock speed** of chips with more and more transistors cannot be increased at the previous rate without **overheating**
+- In 2015, a typical processor chip will likely consist of dozens up to hundreds of cores where a part of the cores will be dedicated to specific purpose like network management, encryption and decryption, or graphics.
+- If a software company is able to transform its software so that it runs efficiently on novel multicore architectures, it will likely have an advantage over its competitors.
+
+
+### 1.3 Basic Concepts
+
+- `Task` : decomposition of the computation of an application into several parts, which can be computed in parallel on the cores or processors of parallel hardware
+- `Granularity` : the size of the task (in terms of number of instructions)
+- `Potential parallelism` : is an inherent property of an application algorithm and influence how an application can be split into tasks
+- `Scheduling` : assignment of tasks to processes or threads
+    - fix the order of task execution
+    - **dependencies** of tasks are constrains for scheduling
+    - done by hand in source code or by programming environment at compile time or dynamically at runtime
+- `Mapping` : the assignment of processes or threads into physical units, processors or cores
+    - done by runtime system or threading libraries 
+- `synchronization and coordination` : the methods of synchronization and coordination in parallel computing are strongly connected with the way in which the information is exchanged between processes or threads, and it depends on the memory organization of hardware
+    - **shared memory machines**
+        - thread
+        - a global shared memory stores the data of an application and can be accessed by all processors or cores of the hardware systems
+        - information exchange is done by **shared variables** w/r by threads
+    - **distributed memory machines**
+        - process
+        - private memory for each processor, can only be accessed by this processor
+        - information exchange is done by sending data from one processor to another processor via **interconnection network** by explicit communication operations
+-  `Barrier Operation` :
+    - for both **shared/distributed memory machines**
+    - all threads/processes have to wait at a barrier synchronization point until all **threads/processes** have reached that point
+- `Parallel Execution Time` : time elapsed between the start of the application on the first processor and the end of execution of application on all processors
+    - it consists :
+        - time for computation on processors or cores
+        - time for data exchange or synchronization
+    - it is influenced by :
+        - distribution of work to processors/cores
+        - time for information exchange/synchronization
+        - idle time in which processor cannot do anything but waiting for an event to happen
+    - features of good parallel programming :
+        - Load Balancing : equally assigned tasks to processors/cores
+        - Overhead for information exchange is small
+        - synchronization and idle time is small
+    - quantitative evaluation :
+        - **speedup**
+        - **efficiency**

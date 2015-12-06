@@ -1,0 +1,95 @@
+<!DOCTYPE html><html><head><title>Chapter 1</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'></head><body><div id='preview-contents' class='note-content'>
+                        <div id="wmd-preview" class="preview-content"></div>
+                    <div id="wmd-preview-section-453" class="wmd-preview-section preview-content">
+
+</div><div id="wmd-preview-section-454" class="wmd-preview-section preview-content">
+
+<h1 id="chapter-1">Chapter 1</h1>
+
+</div><div id="wmd-preview-section-455" class="wmd-preview-section preview-content">
+
+<h1 id="introduction">Introduction</h1>
+
+<p></p>
+
+<hr>
+
+<div><div class="toc"><div class="toc">
+<ul>
+<li><a href="#chapter-1">Chapter 1</a></li>
+<li><a href="#introduction">Introduction</a><ul>
+<li><ul>
+<li><a href="#12-parallelism-in-todays-hardware">1.2 Parallelism in Today’s Hardware</a></li>
+<li><a href="#13-basic-concepts">1.3 Basic Concepts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<hr>
+
+</div><div id="wmd-preview-section-456" class="wmd-preview-section preview-content">
+
+<h3 id="12-parallelism-in-todays-hardware">1.2 Parallelism in Today’s Hardware</h3>
+
+<ul><li>The technological development towards <strong>Multicore processors</strong> are forced by physical reasons since <strong>clock speed</strong> of chips with more and more transistors cannot be increased at the previous rate without <strong>overheating</strong></li>
+<li>In 2015, a typical processor chip will likely consist of dozens up to hundreds of cores where a part of the cores will be dedicated to specific purpose like network management, encryption and decryption, or graphics.</li>
+<li>If a software company is able to transform its software so that it runs efficiently on novel multicore architectures, it will likely have an advantage over its competitors.</li>
+</ul>
+
+</div><div id="wmd-preview-section-457" class="wmd-preview-section preview-content">
+
+<h3 id="13-basic-concepts">1.3 Basic Concepts</h3>
+
+<ul><li><code>Task</code> : decomposition of the computation of an application into several parts, which can be computed in parallel on the cores or processors of parallel hardware</li>
+<li><code>Granularity</code> : the size of the task (in terms of number of instructions)</li>
+<li><code>Potential parallelism</code> : is an inherent property of an application algorithm and influence how an application can be split into tasks</li>
+<li><code>Scheduling</code> : assignment of tasks to processes or threads <br>
+<ul>
+<li>fix the order of task execution</li>
+<li><strong>dependencies</strong> of tasks are constrains for scheduling</li>
+<li>done by hand in source code or by programming environment at compile time or dynamically at runtime</li></ul></li>
+<li><code>Mapping</code> : the assignment of processes or threads into physical units, processors or cores <br>
+<ul>
+<li>done by runtime system or threading libraries </li></ul></li>
+<li><code>synchronization and coordination</code> : the methods of synchronization and coordination in parallel computing are strongly connected with the way in which the information is exchanged between processes or threads, and it depends on the memory organization of hardware <br>
+<ul>
+<li><strong>shared memory machines</strong> <br>
+<ul>
+<li>thread</li>
+<li>a global shared memory stores the data of an application and can be accessed by all processors or cores of the hardware systems</li>
+<li>information exchange is done by <strong>shared variables</strong> w/r by threads</li></ul></li>
+<li><strong>distributed memory machines</strong> <br>
+<ul>
+<li>process</li>
+<li>private memory for each processor, can only be accessed by this processor</li>
+<li>information exchange is done by sending data from one processor to another processor via <strong>interconnection network</strong> by explicit communication operations</li></ul></li></ul></li>
+<li><code>Barrier Operation</code> : <br>
+<ul>
+<li>for both <strong>shared/distributed memory machines</strong></li>
+<li>all threads/processes have to wait at a barrier synchronization point until all <strong>threads/processes</strong> have reached that point</li></ul></li>
+<li><code>Parallel Execution Time</code> : time elapsed between the start of the application on the first processor and the end of execution of application on all processors <br>
+<ul>
+<li>it consists : <br>
+<ul>
+<li>time for computation on processors or cores</li>
+<li>time for data exchange or synchronization</li></ul></li>
+<li>it is influenced by : <br>
+<ul>
+<li>distribution of work to processors/cores</li>
+<li>time for information exchange/synchronization</li>
+<li>idle time in which processor cannot do anything but waiting for an event to happen</li></ul></li>
+<li>features of good parallel programming : <br>
+<ul>
+<li>Load Balancing : equally assigned tasks to processors/cores</li>
+<li>Overhead for information exchange is small</li>
+<li>synchronization and idle time is small</li></ul></li>
+<li>quantitative evaluation : <br>
+<ul>
+<li><strong>speedup</strong></li>
+<li><strong>efficiency</strong></li></ul></li></ul></li>
+</ul></div><div id="wmd-preview-section-footnotes" class="preview-content"></div></div></body></html>
