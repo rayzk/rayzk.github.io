@@ -200,6 +200,27 @@ long my_func (){
 See [Nonarithmetic Type Conversion][1]
 
 #### Explicit Type Conversion
+``` cpp
+sqrt ((double) n)
+```
+See [C Operator Precedence][2]
+
+
+### 2.8 Increment and Decrement Operators
+`++n` : increment n before the value is used
+`n++` : increment n after the value is used
+
+
+### 2.9 Bitwise Operators 
+- AND operator `&` : used to mask off some bits
+- inclusive OR `|` : used to turn bits on
+- exclusive OR `^` : indicate different bits
+- shift operator `<<`, `>>` : 
+	- left shift fit vacate with 0
+	- right shift a unsigned type fit vacate with 0
+	- right shift a signed type fit vacate with sign-bit (in **arithmetic shift**), 0-bit (in **logical shift**)
+- one's complement operator `~` : 1-bit to 0-bit and vice versa
+
 
 
 --------------------------------------------------
@@ -214,3 +235,4 @@ See [Nonarithmetic Type Conversion][1]
 
 
 - [ ] Finished
+<!-- only the link is left -->
