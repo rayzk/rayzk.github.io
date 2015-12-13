@@ -134,16 +134,72 @@ See [C Operator Precedence][2]
 
 > For portability, specify `signed` or `unsigned` if non-character data is to be stored in `char` variables
 
-**Implicit Type Conversion**
+#### Implicit Type Conversion
 > Compiler will perform implicit type conversion in following situation : 
 > - Operants have mismatched types
 > - Arguments mismatch with function parameter type
 > - Value mismatch with declared type
 
-**Hierarchy of Types**
+**Hierarchy of Types' Conversion Rank**
+When arithmetic operands have different types, the implicit type conversion is governed by the types' **conversion rank**
+- Integer types :
+	- any two **unsigned integer types** have different conversion ranks, the wider one has higher rank
+	- each **signed integer types** has the same rank as the corresponding unsigned type. e.g., `char` == `signed char` == `unsigned char`
+	- **Standard integer type order** : `bool` < `char` < `short` < `int` < `long` < `long long`
+	- every **enumerated types** has the same rank as its corresponding integer type
+- Floating-point types :
+	- **Floating-point type order** : `float` < `double` < `long double`
+	- `float` has higher rank than any integer type
 
+**Integer Promotion**
+Compiler applies integer promotion : any operand whose type ranks lower than `int` is automatically converted to `int` or `unsigned int`
 
-**Explicit Type Conversion**
+``` cpp
+// Example of Integer Promotion (to int)
+char c = '?';
+if (c < 'A')
+// 'A' as a const char has type int, thus c is implicitly promoted to int for the comparison
+
+// Example of Integer Promotion (to unsigned int)
+unsigned short var = 100;
+var = var + 1;
+// if the machine is 32-bit, before the addition, the value of var is promoted to int which is wider than unsigned short
+// if the machine is 16-bit, hence the signed type int is not wide enough to hold all possible values of unsigned short. Therefore, var is promoted to unsigned int
+```
+
+**Arithmetic Conversion**
+- Conversion performed for operators :
+	- **Arithmetic operator** : `*`, `/`, `%`, `+`, `-`
+	- **Relational/Equality operator** : `<`, `<=`, `!=`, ...
+	- **Bitwise operator** : `&`, `|`, `^`
+	- **Conditional operator** : `?`, `:`
+- If either operand has **floating-point type** :
+	- lower **conversion rank** is converted to the higher one
+- If both have **Integer type** :
+	- **Integer promotion** is first performed on both operands, if still have different types, continue ...
+	- If the higher one has `unsigned type` `T`, then the other one is converted to type `T`
+	- If the higher one has `signed type` `T`, then the other one is converted to type `T` only if `T` is capable of representing all values of its original type. If not, both are converted to `unsigned T`
+
+**Other Implicit Type Conversion**
+- In **assignment/initialization**, right operand is always converted to left operand
+- In **function call**, arguments are converted to types of parameters
+- In **return statement**, return expression is converted to function return type
+
+``` cpp
+// Example of Implicit Type Conversion
+float x = 0.5; // constant value is converted from double to float
+int i = 7;
+i = x; // the value of x is converted from float to int
+x += 2.5; // before the addition, the value of x is converted to double; after the addition, the sum is converted to float and assigned to float x
+long my_func (){
+	return 0; // constant 0 is converted to long
+}
+```
+
+#### Non-arithmetic Type Conversion
+See [Nonarithmetic Type Conversion][1]
+
+#### Explicit Type Conversion
 
 
 --------------------------------------------------
@@ -152,6 +208,9 @@ See [C Operator Precedence][2]
 
 <!-- c_operator_precedence -->
 [2]: http://
+
+<!-- nonarithmetic_type_conversion -->
+[3]: http://
 
 
 - [ ] Finished
