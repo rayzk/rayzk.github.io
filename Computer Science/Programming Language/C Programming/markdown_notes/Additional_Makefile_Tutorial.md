@@ -55,10 +55,35 @@ clean :
            insert.o search.o files.o utils.o
 ```
 
+**Comments**
+- `#` and the rest of the line will be ignored. If you want a literal #, use `/` to escape it.
+- `#` cannot be used within **variable reference** and **function calls**
+- Comments within a recipe are passed to the shell
+- Comments are not ignored within a `define` directive, during the definition of the variable. When the variable expanded, they will either be comments or recipe text.
+
+**Splitting a Long Line**
+- Use `/` to escape the newline character
+
+**Name of Makefile**
+- *make* command looks for names in order : `GNUmakefile`, `makefile`, `Makefile`
+- `Makefile` is recommended since it near files like `README`
+
+**`include` Directive**
+```makefile
+include *.md $(bar)
+```
+- The first character must not be `.RECIPEPREFIX`, otherwise it will be taken as a recipe line. (`recipe` has higher order then `include`)
+- Variables will be expended in the include
+- Files in the `include` line will be executed by make, when make process execute that `include` line
+- If the file is not found, directories in `-I` option will be searched. Refer to [Make Options][5]
+- `-include` will let the Make ignore a makefile which does not exist or cannot be remade
+
+
+
 - Command *make* execute the recipe when the target file needs to be updated; **Make** does not know anything about the recipes
 - Target `clean` is not a file (since it is not a prerequisite of any other rule). Thus *make* does not execute the recipe under `clean`, unless command *make clean* is called
 
-> **Phony Target** : target do not refer to files but just actions
+
 
 
 ### 3. Process a Makefile
@@ -100,8 +125,7 @@ clean :
 
 > Refer to [Variables][2] 
 
-
-### 5. Make Deduces
+**Make Deduces**
 - Make has [implicit rules][3] to compile `.c` file into correspondingly named `.o` file. It will use *cc -c main.c -o main.o*
 - When a `.c` file is compiled automatically, it is also automatically added to the list of prerequisites. 
 
@@ -130,6 +154,20 @@ clean :
 > Explicitly declare `clean` to be phony by making it a prerequisite of the [special target][3] `.PHONY`
 
 
+### 5. Pattern Rules
+**Pattern rule**
+- `%` in the target, matches any nonempty substring. The substring that `%` matches is called `stem`
+- `%` in one prerequisite rule stands for the same `stem`
+
+**Examples**
+```makefile
+# compile all file end with .c
+%.o : %.c
+	$(cc) -c $(CFLAGES) $< -o $@
+```
+
+**Automatic Variables**
+
 
 
 
@@ -147,3 +185,6 @@ clean :
 
 <!-- GUN make / special targets -->
 [4]: http://www.gnu.org/software/make/manual/make.html#Special-Targets
+
+<!-- GUN make / options -->
+[5]: https://www.gnu.org/software/make/manual/make.html#Options-Summary
