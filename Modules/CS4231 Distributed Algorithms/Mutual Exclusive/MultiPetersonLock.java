@@ -2,6 +2,9 @@ package MutualExclusive;
 
 /**
  * Created by RayZK on 17/01/16.
+ *
+ * Mutual Exclusion Algorithm for N process using Peterson's ALgo as black box.
+ * This round fashion implementation cause error. 
  */
 public class MultiPetersonLock implements Lock {
 

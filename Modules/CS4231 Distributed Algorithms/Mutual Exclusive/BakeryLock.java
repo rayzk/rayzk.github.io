@@ -2,6 +2,8 @@ package MutualExclusive;
 
 /**
  * Created by RayZK on 17/01/16.
+ *
+ * Bakery Algorithm for N processes
  */
 public class BakeryLock implements Lock {
 

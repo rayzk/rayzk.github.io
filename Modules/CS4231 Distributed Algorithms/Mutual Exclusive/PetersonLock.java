@@ -2,6 +2,8 @@ package MutualExclusive;
 
 /**
  * Created by RayZK on 17/01/16.
+ *
+ * Peterson's Algorithm
  */
 public class PetersonLock implements Lock {
 
